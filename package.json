@@ -29,6 +29,6 @@
     "clean": "rm -rf build/*",
     "build-server": "babel -d build/server source/server -s",
     "build-client": "browserify static/scripts/index.js -t babelify --outfile build/bundle.js",
-    "build": "npm run clean && npm build-client"
+    "build": "npm run clean && npm run build-client"
   }
 }

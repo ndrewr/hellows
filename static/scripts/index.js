@@ -1,39 +1,42 @@
 
 import React from 'react';
 
-var Card = React.createClass({
-    render: function() {
+class Card extends React.Component {
+    render() {
         return (
-            <div class="welcome-card">
+            <div className="welcome-card">
                 <p>
-                  <span class="welcome-phrase">{this.props.data.phrase}</span>
+                  <span className="welcome-phrase">{this.props.data.phrase}</span>
                 </p>
-                <span class="welcome-origin">{this.props.data.origin}</span>
+                from <span className="welcome-origin">{this.props.data.origin}</span>
             </div>
         );
     }
-});
+}
 
-var Container = React.createClass({
-    render: function() {
+class Container extends React.Component {
+    render() {
+
+        let all_cards = [];
+        this.props.cards.forEach(card => {
+          all_cards.push( <Card data={card} /> );
+        })
         return (
-            <div class="container">
-                <Card data={this.props.card} />
-            </div>
+            <div className="card-board">{all_cards}</div>
         );
     }
-});
+}
 
 
-var PRODUCTS = [
-  {category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football'},
-  {category: 'Sporting Goods', price: '$9.99', stocked: true, name: 'Baseball'},
-  {category: 'Sporting Goods', price: '$29.99', stocked: false, name: 'Basketball'},
-  {category: 'Electronics', price: '$99.99', stocked: true, name: 'iPod Touch'},
-  {category: 'Electronics', price: '$399.99', stocked: false, name: 'iPhone 5'},
-  {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7'}
+var CARDS = [
+  {origin:'Andrew', phrase: 'Hello World!'},
+  {origin:'Snoopy', phrase: '...'},
+  {origin:'Walter', phrase: 'Hoy!'},
+  {origin:'Spazzie', phrase: 'Hello, hello, hello.'},
+  {origin:'Japan', phrase: 'Ohayoo!'},
+  {origin: 'Greg', phrase: 'Ahoy-hoy everyone!'}
 ];
 
 var first_card = {origin:'Andrew', phrase: 'Hello!'};
 
-React.render(<Container card={first_card} />, document.querySelector('.container'));
+React.render(<Container cards={CARDS} />, document.querySelector('.container'));
