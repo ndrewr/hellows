@@ -4,7 +4,11 @@
   "description": "saying thanks",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint source",
+    "clean": "rm -rf build/*",
+    "build-server": "babel -d build/server source/server -s",
+    "build-client": "browserify static/scripts/index.js -t babelify --outfile build/bundle.js",
+    "build": "npm run clean && npm run build-client"
   },
   "keywords": [
     "react",
@@ -22,13 +26,10 @@
     "eslint": "^1.5.1"
   },
   "dependencies": {
-    "react": "^0.13.3"
-  },
-  "scripts": {
-    "lint": "eslint source",
-    "clean": "rm -rf build/*",
-    "build-server": "babel -d build/server source/server -s",
-    "build-client": "browserify static/scripts/index.js -t babelify --outfile build/bundle.js",
-    "build": "npm run clean && npm run build-client"
+    "backbone": "^1.2.3",
+    "jquery": "^2.1.4",
+    "react": "^0.13.3",
+    "react.backbone": "^0.6.0",
+    "underscore": "^1.8.3"
   }
 }

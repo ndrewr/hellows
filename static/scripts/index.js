@@ -1,5 +1,17 @@
 
-import React from 'react';
+import Backbone from 'backbone';
+import React from 'react.backbone'; // includes react
+
+// dummy data
+var CARDS = [
+  {origin:'Andrew', phrase: 'Hello World!'},
+  {origin:'Snoopy', phrase: '...'},
+  {origin:'Walter', phrase: 'Hoy!'},
+  {origin:'Spazzie', phrase: 'Hello, hello, hello.'},
+  {origin:'Japan', phrase: 'Ohayoo!'},
+  {origin: 'Greg', phrase: 'Ahoy-hoy everyone!'}
+];
+
 
 class Card extends React.Component {
     render() {
@@ -14,29 +26,32 @@ class Card extends React.Component {
     }
 }
 
-class Container extends React.Component {
+// class Container extends React.Component {
+var Container = React.createBackboneClass ({
     render() {
-
-        let all_cards = [];
-        this.props.cards.forEach(card => {
-          all_cards.push( <Card data={card} /> );
-        })
+        let all_cards = this.getCollection().map(card => {
+          console.dir(card);
+          return <Card data={card.attributes} />;
+        });
         return (
             <div className="card-board">{all_cards}</div>
         );
     }
-}
+});
 
 
-var CARDS = [
-  {origin:'Andrew', phrase: 'Hello World!'},
-  {origin:'Snoopy', phrase: '...'},
-  {origin:'Walter', phrase: 'Hoy!'},
-  {origin:'Spazzie', phrase: 'Hello, hello, hello.'},
-  {origin:'Japan', phrase: 'Ohayoo!'},
-  {origin: 'Greg', phrase: 'Ahoy-hoy everyone!'}
-];
+// define the Card model
+// two properties: phrase and origin (both strings)
+var CardData = Backbone.Model.extend({
+  defaults: {
+    phrase: 'Hi!',
+    origin: 'Friendly Stranger'
+  }
+});
 
-var first_card = {origin:'Andrew', phrase: 'Hello!'};
+// instantiate the collection and seed with data
+var cardstack = new Backbone.Collection({model:CardData});
+cardstack.set(CARDS);
 
-React.render(<Container cards={CARDS} />, document.querySelector('.container'));
+
+React.render(<Container collection={cardstack} />, document.querySelector('.container'));
