@@ -72,7 +72,9 @@ class Card extends React.Component {
     render() {
         return (
           <div>
-            <a href="#" className="card-pin"></a>
+            <a href="#" className="card-pin">
+              <span className="card-pin__remove">X</span>
+            </a>
             <div className="welcome-card paper-bg paper">
                 <p>
                   <span className="welcome-phrase">{this.props.data.phrase}</span>
