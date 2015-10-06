@@ -27,6 +27,8 @@
   },
   "dependencies": {
     "backbone": "^1.2.3",
+    "backfire": "file:static/scripts/backfire",
+    "firebase": "^2.3.1",
     "jquery": "^2.1.4",
     "react": "^0.13.3",
     "react.backbone": "^0.6.0",

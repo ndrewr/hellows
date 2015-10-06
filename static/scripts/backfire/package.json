@@ -1,0 +1,20 @@
+{
+  "name": "backfire",
+  "version": "1.0.0",
+  "description": "a simple module wrapping around backbonefire",
+  "main": "backfire.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "backbone",
+    "firebase",
+    "backbonefire"
+  ],
+  "dependencies": {
+    "backbone": "1.x.x",
+    "underscore": ">=1.7.0"
+  },
+  "author": "Andrew Roy Chen",
+  "license": "ISC"
+}

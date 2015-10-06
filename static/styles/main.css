@@ -1,12 +1,28 @@
 
 
+.paper-bg {
+  /*from CSS3 Patterns */
+	background-color: #fff;
+	background-image:
+	linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
+	linear-gradient(#eee .1em, transparent .1em);
+	background-size: 100% 1.2em;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  position:relative;
+}
+
 html, body {
   height: 100%;
   width: 100%;
 }
 
 body {
-
+  font-family: 'Annie Use Your Telescope', cursive;
+  /*font-family: 'Reenie Beanie', cursive;*/
 
   background-image:
   radial-gradient(closest-side, transparent 0%, transparent 75%, #B6CC66 76%, #B6CC66 85%, #EDFFDB 86%, #EDFFDB 94%, #FFFFFF 95%, #FFFFFF 103%, #D9E6A7 104%, #D9E6A7 112%, #798B3C 113%, #798B3C 121%, #FFFFFF 122%, #FFFFFF 130%, #E0EAD7 131%, #E0EAD7 140%),
@@ -34,7 +50,7 @@ body {
     flex-flow: row wrap;
     align-items: center;
     justify-content: center;
-    opacity: .9;
+    opacity: .95;
 }
 #mainContent h3 {
 
@@ -42,13 +58,14 @@ body {
 }
 
 .container {
-    width: 100%;
+    /*width: 100%;*/
     padding: 20px;
 
 }
 
 .card-board {
   width: 90%;
+  margin: 0 auto;
   min-height: 300px;
   padding: 20px;
   border: 5px solid #555;
@@ -65,28 +82,121 @@ body {
 }
 
 .welcome-card {
+  z-index: 100;
 	min-width: 180px;
 	padding: 20px;
 	margin: 20px 30px;
 	border-radius: 5%;
 	border: 3px dashed #fff;
 	text-align: center;
+  /*font-family: 'Annie Use Your Telescope', cursive;*/
 
-	/*from CSS3 Patterns */
-	background-color: #fff;
-	background-image:
-	linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
-	linear-gradient(#eee .1em, transparent .1em);
-	background-size: 100% 1.2em;
+  -webkit-clip-path: polygon(0% 2%, 4% 0%, 6% 1%, 11% 0%, 13% 1%, 19% 0%, 23% 1%, 27% 0%, 30% 3%, 34% 0%, 38% 0%, 44% 0%, 49% 1%, 56% 0%, 58% 2%, 63% 1%, 66% 1%, 70% 0%, 74% 1%, 79% 0%, 84% 2%, 88% 0%, 91% 1%, 96% 0%, 97% 2%, 100% 0%, 99% 99%, 0% 99%);
+  clip-path: polygon(0% 2%, 4% 0%, 6% 1%, 11% 0%, 13% 1%, 19% 0%, 23% 1%, 27% 0%, 30% 3%, 34% 0%, 38% 0%, 44% 0%, 49% 1%, 56% 0%, 58% 2%, 63% 1%, 66% 1%, 70% 0%, 74% 1%, 79% 0%, 84% 2%, 88% 0%, 91% 1%, 96% 0%, 97% 2%, 100% 0%, 99% 99%, 0% 99%);
 }
 
 .welcome-phrase {
-	font: italic bold 32px Helvetica, Arial, sans-serif;
+  font-size: 32px;
+  font-weight: 600;
 	letter-spacing: 3px;
 	color: #3995D9;
 }
 
 .welcome-origin {
-	font: 18px Georgia, serif;
 	color: #555;
+}
+
+.card-pin {
+  position: absolute;
+  z-index: 200;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+  background-color: inherit;
+
+  background-image:
+    linear-gradient(
+      to top right,
+      red, #f06d06
+    );
+
+  /*box-shadow: inset 0 0 10px #f06d06;*/
+  box-shadow: 1px 1px 5px -1px rgba(0, 0, 0, 0.4),
+  inset 0 0 10px #f06d06;;
+}
+
+.notepad {
+  /*height: 100px;*/
+  width: 50%;
+  padding: 5px 20px;
+  margin: 20px auto;
+  border-radius: 5%;
+}
+
+.notepad__rules {
+    font-size: 24px;
+    left: 20%;
+    /*text-align: center;*/
+
+}
+
+input[type="text"] {
+  /*display: block;*/
+  margin: 0 10px;
+  /*width: 100%;*/
+  /*font-family: sans-serif;*/
+  font-family: 'Annie Use Your Telescope', cursive;
+  background-color: transparent;
+  font-size: 24px;
+  appearance: none;
+  box-shadow: none;
+  border: none;
+}
+input[type="text"]:focus {
+  outline: none;
+}
+
+.notepad__section {
+  margin-left: 60px;
+}
+
+.notepad__section label {
+  margin-left: 10px;
+  padding: 0 5px;
+  /*width: 60px;*/
+  /*text-align: right;*/
+  font-size: 32px;
+}
+
+.notepad__section input {
+
+}
+
+.notepad button {
+  position: absolute;
+  top: 10%;
+  right: -10%;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  background-color: #37f;
+  color: #fff;
+}
+
+.paper {
+  margin-top:50px;
+  line-height:1.5em;
+  background-image: -webkit-linear-gradient(rgba(0,0,0,0.1) 1px, transparent 1px);
+  background-image: -moz-linear-gradient(rgba(0,0,0,0.1) 1px, transparent 1px);
+  background-image: -ms-linear-gradient(rgba(0,0,0,0.1) 1px, transparent 1px);
+  background-size:100% 1.5em;
+  background-position:0 1.2em;
+  background-origin:content-box;
+  background-color:rgba(yellow,.5);
+  font-size:140%;
+  padding:1.3em;
+  box-shadow:0px 0px 10px rgba(black,.3);
 }
