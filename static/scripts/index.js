@@ -1,4 +1,3 @@
-
 /*
 project: hellows
 file: index.js
@@ -9,33 +8,10 @@ import Firebase from 'firebase';
 var Backbone = require('backfire');
 import React from 'react.backbone'; // includes react
 
-// dummy data
-var CARDS = [
-  {origin:'Andrew', phrase: 'Hello World!'},
-  {origin:'Snoopy', phrase: '...'},
-  {origin:'Walter', phrase: 'Hoy!'},
-  {origin:'Spazzie', phrase: 'Hello, hello, hello.'},
-  {origin:'Japan', phrase: 'Ohayoo!'},
-  {origin: 'Greg', phrase: 'Ahoy-hoy everyone!'}
-];
-
 
 class Notepad extends React.Component {
 
-    get cardInfo() {
-      let phrase = document.querySelector('#phrase').value;
-      let origin = document.querySelector('#origin').value;
-      console.log('here is where a new card is made');
-      console.log('Greeting is %s and source is %s', phrase, origin);
-
-      return {
-        phrase: document.querySelector('#phrase').value,
-        origin: document.querySelector('#origin').value
-      };
-    }
-
     makeNewCard() {
-
       cardstack.add({
         phrase: document.querySelector('#phrase').value,
         origin: document.querySelector('#origin').value
@@ -59,8 +35,8 @@ class Notepad extends React.Component {
           </p>
           <p className="notepad__section">
             <label>from:</label>
-            <input id="origin" type="text" name="origin" placeholder="a friend"
-            required maxlength="30"/>
+            <input id="origin" type="text" name="origin"
+            placeholder="a friend" required maxlength="30"/>
           </p>
           <button onClick={this.makeNewCard}>POST!</button>
         </div>
@@ -69,17 +45,24 @@ class Notepad extends React.Component {
 }
 
 class Card extends React.Component {
+
+    trashCard() {
+      this.props.removeCard(this.props.model);
+    }
+
+
     render() {
+        let model = this.props.model;
         return (
           <div>
-            <a href="#" className="card-pin">
+            <a href="#" className="card-pin" onClick={this.trashCard.bind(this)}>
               <span className="card-pin__remove">X</span>
             </a>
             <div className="welcome-card paper-bg paper">
                 <p>
-                  <span className="welcome-phrase">{this.props.data.phrase}</span>
+                  <span className="welcome-phrase">{model.attributes.phrase}</span>
                 </p>
-                from <span className="welcome-origin">{this.props.data.origin}</span>
+                from <span className="welcome-origin">{model.attributes.origin}</span>
             </div>
           </div>
         );
@@ -88,10 +71,18 @@ class Card extends React.Component {
 
 // class Container extends React.Component {
 var Container = React.createBackboneClass ({
+
+    removeCard(model) {
+        event.preventDefault();
+        console.dir(model);
+        this.getCollection().remove(model);
+        console.log('remove triggered.');
+    },
+
     render() {
         let all_cards = this.getCollection().map(card => {
-          // console.dir(card);
-          return <Card data={card.attributes} />;
+          // return <Card data={card.attributes} removeCard={this.removeCard} />;
+          return <Card model={card} removeCard={this.removeCard} />;
         });
         return (
           <div>
@@ -118,7 +109,6 @@ var CardStack = Backbone.Firebase.Collection.extend({
   url: 'https://hellows.firebaseio.com/',
 });
 var cardstack = new CardStack();
-// cardstack.add(CARDS);
 
 
 React.render(<Container collection={cardstack} />, document.querySelector('.container'));
